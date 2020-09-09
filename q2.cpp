@@ -185,9 +185,7 @@ public:
         for (int i = b.data.size() - 1; i >= 0; i--)
         {
             int multcarry = 0;
-            //int d2 = b.data[b.data.size() - 1-i]-'0';
             int d2 = b.data[i] - '0';
-            //BigInteger tempresult(string(b.data.size() - i,'0'));
             BigInteger tempresult(0);
             tempresult.data = "";
             for (int j = i + 1; j < b.data.size(); j++)
@@ -425,7 +423,13 @@ BigInteger factorial(BigInteger b)
     return result;
 }
 
-BigInteger fastExpUtil(BigInteger &a, BigInteger &b)
+BigInteger factorial(long long int b)
+{
+    BigInteger temp(b);
+    return factorial(temp);
+}
+
+BigInteger fastExpUtil(BigInteger a, BigInteger b)
 {
     if (b == 0)
     {
@@ -474,7 +478,42 @@ BigInteger fastExp(BigInteger &a, long long int b)
 
 int main()
 {
-    BigInteger a(987);
-    BigInteger b(INT_MAX);
-    cout << factorial(987) << endl;
+    int Q;
+    cin >> Q;
+    while (Q--)
+    {
+        int type;
+        cin >> type;
+        if (type == 1)
+        {
+            //exponentiation
+            string a, b;
+            cin >> a;
+            cin >> b;
+            BigInteger A(a);
+            BigInteger B(b);
+            BigInteger res(0);
+            res = fastExp(A, B);
+            cout << res << endl;
+        }
+        else if (type == 2)
+        {
+            //gcd
+            string a, b;
+            cin >> a;
+            cin >> b;
+            BigInteger A(a);
+            BigInteger B(b);
+            BigInteger res(0);
+            res = gcd(A, B);
+            cout << res << endl;
+        }
+        else
+        {
+            string a;
+            cin >> a;
+            BigInteger A(a);
+            cout << factorial(A) << endl;
+        }
+    }
 }

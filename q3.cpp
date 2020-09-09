@@ -33,7 +33,7 @@ public:
     {
         this->length = 0;
         this->arr = new T[100];
-        this->head = this->tail = arr[50];
+        this->head = this->tail = arr + 50;
         this->arrbegin = this->arr;
         this->arrend = this->arr + 99;
     }
@@ -207,16 +207,120 @@ public:
         {
             throw out_of_range("Deque is empty");
         }
-        if (n > this->length - 1)
+        if (n > this->length - 1 || n < 0)
         {
             throw out_of_range("Your index is not in range of 0 and " + to_string(this->length - 1));
         }
         return *(this->head + n);
     }
+
+    void display()
+    {
+        for (int i = 0; i < this->length; i++)
+        {
+            cout << *(this->head + i) << " ";
+        }
+        cout << endl;
+    }
 };
 
 int main()
 {
-    deque<int> d(5, 7);
-    cout << d[4] << endl;
+    /*deque<int> d(2, 7);
+    for(int i=0;i<75;i++)
+    {
+        d.push_front(13);
+    }
+    cout<<d[65]<<endl;
+    cout<<d.size()<<endl;*/
+
+    deque<string> *dq = new deque<string>();
+    int Q;
+    cin >> Q;
+    while (Q--)
+    {
+        int type;
+        cin >> type;
+        if (type == 1)
+        {
+            string x;
+            cin >> x;
+            dq->push_front(x);
+            dq->display();
+        }
+        else if (type == 2)
+        {
+            dq->pop_front();
+            dq->display();
+        }
+        else if (type == 3)
+        {
+            string x;
+            cin >> x;
+            dq->push_back(x);
+            dq->display();
+        }
+        else if (type == 4)
+        {
+            dq->pop_back();
+            dq->display();
+        }
+        else if (type == 5)
+        {
+            dq = new deque<string>();
+        }
+        else if (type == 6)
+        {
+            int n;
+            string x;
+            cin >> n;
+            cin >> x;
+            dq = new deque<string>(n, x);
+            dq->display();
+        }
+        else if (type == 7)
+        {
+            cout << dq->front() << endl;
+        }
+        else if (type == 8)
+        {
+            cout << dq->back() << endl;
+        }
+        else if (type == 9)
+        {
+            bool t = dq->empty();
+            if (t)
+                cout << "true" << endl;
+            else
+                cout << "false" << endl;
+        }
+        else if (type == 10)
+        {
+            cout << dq->size() << endl;
+        }
+        else if (type == 11)
+        {
+            int x;
+            string d;
+            cin >> x;
+            cin >> d;
+            dq->resize(x, d);
+            dq->display();
+        }
+        else if (type == 12)
+        {
+            dq->clear();
+            dq->display();
+        }
+        else if (type == 13)
+        {
+            int n;
+            cin >> n;
+            cout << (*dq)[n] << endl;
+        }
+        else if (type == 14)
+        {
+            dq->display();
+        }
+    }
 }

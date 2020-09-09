@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 void evaluate(string &expr);
@@ -195,14 +196,13 @@ void evaluate(string &expr)
         string result = doOperation(opd1, opd2, op);
         operands.push(result);
     }
-    cout << operands.top() << endl;
+    cout << std::fixed << setprecision(5) << stod(operands.top()) << endl;
 }
 
 int main()
 {
     string expr;
     getline(cin, expr);
-
     evaluate(expr);
 }
 
